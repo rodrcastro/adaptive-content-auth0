@@ -1,12 +1,11 @@
 'use client';
 
 import { useUser } from '@auth0/nextjs-auth0';
-import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 
 export default function Home() {
-  const { user, error, isLoading } = useUser();
+  const { user, isLoading } = useUser();
   const [isLoadingDoc, setIsLoadingDoc] = useState(false);
 
   if (isLoading) {
