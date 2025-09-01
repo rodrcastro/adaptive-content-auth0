@@ -49,7 +49,7 @@ export default function Home() {
                   setIsLoadingDoc(true);
                   try {
                     // Call the API to create JWT token and set cookie
-                    const response = await fetch('/api/gitbook-token');
+                    const response = await fetch(`/api/gitbook-token?userId=${encodeURIComponent(user.sub || '')}`);
                     if (response.ok) {
                       const data = await response.json();
                       // Get the token from the response and add it as query parameter

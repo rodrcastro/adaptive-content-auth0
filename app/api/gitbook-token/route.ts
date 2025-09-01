@@ -1,21 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { auth0 } from '@/lib/auth0';
 import { signJWT } from '@/lib/jwt';
+import { getUserInfo } from '@/lib/auth0-management';
 
 export async function GET(request: NextRequest) {
   try {
-    // Get the user session from Auth0
-    const session = await auth0.getSession(request);
+    // Get user ID from the Authorization header or query parameter
+    const authHeader = request.headers.get('authorization');
+    const userId = request.nextUrl.searchParams.get('userId');
     
-    if (!session?.user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    if (!userId && !authHeader) {
+      return NextResponse.json({ error: 'User ID required' }, { status: 400 });
     }
 
-    // Create JWT payload with user information and custom claims
+    // Extract user ID from Authorization header if present
+    const userSub = userId || authHeader?.replace('Bearer ', '');
+    
+    if (!userSub) {
+      return NextResponse.json({ error: 'Invalid user ID' }, { status: 400 });
+    }
+
+    // Get user information from Auth0 Management API
+    const userInfo = await getUserInfo(userSub);
+    
     const payload = {
-      email: session.user.email || '',
-      name: session.user.name || '',
-      sub: session.user.sub || '',
+      email: userInfo.email,
+      name: userInfo.name,
+      sub: userInfo.user_id,
       language: 'en',
       isLoggedIn: true 
     };
