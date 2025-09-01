@@ -23,10 +23,11 @@ export async function GET(request: NextRequest) {
     // Sign the JWT token
     const token = signJWT(payload);
 
-    // Create the response
+    // Create the response with the token
     const response = NextResponse.json({ 
       success: true, 
-      message: 'Token created successfully' 
+      message: 'Token created successfully',
+      token: token
     });
 
     // Set the cookie

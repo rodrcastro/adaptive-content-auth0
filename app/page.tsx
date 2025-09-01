@@ -51,8 +51,10 @@ export default function Home() {
                     // Call the API to create JWT token and set cookie
                     const response = await fetch('/api/gitbook-token');
                     if (response.ok) {
-                      // TODO: Replace with your actual documentation URL
-                      window.location.href = 'YOUR_DOCUMENTATION_URL_HERE';
+                      const data = await response.json();
+                      // Get the token from the response and add it as query parameter
+                      const token = data.token;
+                      window.location.href = `https://adaptive.rodrcastro.dev?jwt_token=${encodeURIComponent(token)}`;
                     } else {
                       console.error('Failed to create token');
                       alert('Failed to access documentation. Please try again.');
