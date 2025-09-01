@@ -14,11 +14,11 @@ interface Auth0User {
 
 export async function getManagementToken(): Promise<string> {
   const domain = process.env.AUTH0_ISSUER_BASE_URL?.replace('https://', '');
-  const clientId = process.env.AUTH0_CLIENT_ID;
-  const clientSecret = process.env.AUTH0_CLIENT_SECRET;
+  const clientId = process.env.AUTH0_M2M_CLIENT_ID;
+  const clientSecret = process.env.AUTH0_M2M_CLIENT_SECRET;
 
   if (!domain || !clientId || !clientSecret) {
-    throw new Error('Missing Auth0 configuration');
+    throw new Error('Missing Auth0 M2M configuration');
   }
 
   const response = await fetch(`https://${domain}/oauth/token`, {
@@ -35,7 +35,9 @@ export async function getManagementToken(): Promise<string> {
   });
 
   if (!response.ok) {
-    throw new Error('Failed to get management token');
+    const errorText = await response.text();
+    console.error('Management token request failed:', response.status, errorText);
+    throw new Error(`Failed to get management token: ${response.status} ${errorText}`);
   }
 
   const data: ManagementTokenResponse = await response.json();
