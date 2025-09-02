@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
       email: userInfo.email,
       name: userInfo.name,
       sub: userInfo.user_id,
-      language: 'en',
+      language: userInfo.user_metadata?.language ?? undefined,
       isLoggedIn: true 
     };
 

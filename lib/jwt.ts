@@ -5,6 +5,8 @@ export interface JWTCustomClaims {
   email: string;
   name: string;
   sub: string;
+  language?: string;
+  isLoggedIn?: boolean;
   iat?: number;
   exp?: number;
 }

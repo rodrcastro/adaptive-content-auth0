@@ -4,10 +4,16 @@ interface ManagementTokenResponse {
   expires_in: number;
 }
 
+interface Auth0UserMetadata {
+  language?: string;
+  [key: string]: unknown;
+}
+
 interface Auth0User {
   user_id: string;
   email: string;
   name: string;
+  user_metadata?: Auth0UserMetadata;
   given_name?: string;
   family_name?: string;
 }
