@@ -42,7 +42,7 @@ export async function GET(request: NextRequest) {
 
     // Set the cookie
     response.cookies.set('gitbook-visitor-token', token, {
-      domain: '.rodrcastro.dev',
+      domain: '.sup-test.org',
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',

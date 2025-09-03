@@ -28,7 +28,7 @@ export async function createGitbookCookie(token: string): Promise<void> {
   const cookieStore = await cookies();
   
   cookieStore.set('gitbook-visitor-token', token, {
-    domain: '.rodrcastro.dev', // Wildcard domain
+    domain: '.sup-test.org', // Wildcard domain
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
