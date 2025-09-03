@@ -72,7 +72,7 @@ export default function Home() {
               </button>
               
               <a 
-                href="/auth/logout"
+                href="/auth/logout?returnTo=https%3A%2F%2Fadaptive.sup-test.org"
                 className="block w-full bg-red-500 text-white py-3 px-4 rounded-lg hover:bg-red-600 transition-colors font-medium"
               >
                 Logout
