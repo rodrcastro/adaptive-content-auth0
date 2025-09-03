@@ -53,7 +53,7 @@ export default function Home() {
                       const data = await response.json();
                       // Get the token from the response and add it as query parameter
                       const token = data.token;
-                      window.location.href = `https://adaptive.sup-org.test?jwt_token=${encodeURIComponent(token)}`;
+                      window.location.href = `https://adaptive.sup-test.org?jwt_token=${encodeURIComponent(token)}`;
                     } else {
                       console.error('Failed to create token');
                       alert('Failed to access documentation. Please try again.');
