@@ -27,7 +27,8 @@ export async function GET(request: NextRequest) {
       name: userInfo.name,
       sub: userInfo.user_id,
       language: userInfo.user_metadata?.language ?? undefined,
-      isLoggedIn: true 
+      isLoggedIn: true,
+      newProperty: false
     };
 
     // Sign the JWT token
